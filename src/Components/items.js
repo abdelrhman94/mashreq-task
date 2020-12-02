@@ -1,4 +1,4 @@
-import { Button, Checkbox, Icon, Table } from 'semantic-ui-react';
+import { Button, Icon, Table } from 'semantic-ui-react';
 
 const Items = ({ onNewItem, items = [] }) => (
   <Table compact>
@@ -15,10 +15,13 @@ const Items = ({ onNewItem, items = [] }) => (
     <Table.Body>
       {items.map((item) => (
         <Table.Row>
-          <Table.Cell>{item.item}</Table.Cell>
+          <Table.Cell>{item.name}</Table.Cell>
           <Table.Cell>{item.quantity}</Table.Cell>
-          <Table.Cell>jilsewris22@yahoo.com</Table.Cell>
-          <Table.Cell>Yes</Table.Cell>
+          <Table.Cell>{item.uom}</Table.Cell>
+          <Table.Cell>{item.unit}</Table.Cell>
+          <Table.Cell>{item.totalPrice}</Table.Cell>
+          <Table.Cell>{item.discount}</Table.Cell>
+          <Table.Cell>{item.totalPriceAfterDiscount}</Table.Cell>
         </Table.Row>
       ))}
     </Table.Body>

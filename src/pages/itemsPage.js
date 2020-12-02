@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Form, Dropdown } from 'semantic-ui-react';
+import { Form } from 'semantic-ui-react';
 import NewItemModal from '../Components/newItem';
 import ItemsTable from '../Components/items';
 
 const options = [
-  { key: 'm', text: 'Male', value: 'male' },
-  { key: 'f', text: 'Female', value: 'female' },
-  { key: 'o', text: 'Other', value: 'other' },
+  { key: 'm', text: 'x', value: 'x' },
+  { key: 'f', text: 'y', value: 'y' },
 ];
 
 const ItemsPage = () => {
-  const [value, setValue] = useState(null);
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState([]);
 
@@ -21,47 +19,47 @@ const ItemsPage = () => {
     const newItems = [
       ...items,
       {
-        item: 'qq',
-        quantity: 56,
+        item: [],
+        quantity: [],
+        uom: [],
+        price: [],
+        discount: [],
+        total: [],
       },
     ];
     setItems(newItems);
   };
+
+  const handleSaveItem = (item) => {
+    setItems([...items, item]);
+    setOpen(false);
+  };
+
   return (
     <>
       <Form>
         <Form.Group widths="equal">
-          <Dropdown
-            clearable
-            options={options}
-            selection
-            fluid
-            label="Category"
-          />
-          <Dropdown
-            clearable
-            options={options}
-            selection
-            fluid
-            label="Brand"
-          />
-          
           <Form.Select
             fluid
-            label="Gender"
+            label="Category"
             options={options}
-            placeholder="Gender"
+            placeholder="Category"
+          />
+
+          <Form.Select
+            fluid
+            label="Brand"
+            options={options}
+            placeholder="brand"
           />
         </Form.Group>
-        <Form.Group inline>
-          <label>Size</label>
-          <Form.Radio label="Small" value="sm" checked={value === 'sm'} />
-          <Form.Radio label="Medium" value="md" checked={value === 'md'} />
-          <Form.Radio label="Large" value="lg" checked={value === 'lg'} />
+        <Form.Group widths="equal">
+          <Form.Input fluid label="Name" placeholder="Name" />
         </Form.Group>
-        <Form.TextArea label="About" placeholder="Tell us more about you..." />
-        <Form.Checkbox label="I agree to the Terms and Conditions" />
-        <Form.Button>Submit</Form.Button>
+        <Form.Group widths="equal">
+          <Form.Input fluid label="SKU" />
+          <Form.Input fluid label="Barcode" />
+        </Form.Group>
       </Form>
       <ItemsTable
         onNewItem={() => {
@@ -71,10 +69,7 @@ const ItemsPage = () => {
       />
       <NewItemModal
         open={open}
-        onClick={() => {
-          addItem();
-          setOpen(false);
-        }}
+        onClick={handleSaveItem}
         onClose={() => {
           setOpen(false);
         }}
