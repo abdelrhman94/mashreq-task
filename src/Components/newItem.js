@@ -75,7 +75,6 @@ const NewItem = ({ open = false, onClose, onClick }) => {
     <Modal
       closeIcon
       open={open}
-      trigger={<Button>Show Modal</Button>}
       onClose={onClose}
     >
       <Header content="Detail Form" />
